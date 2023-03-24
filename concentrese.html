@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Verbos Irregulares</title>
+    <style>
+      
+      /* Estilos de las cartas */
+      .card-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .card {
+        width: 150px;
+        height: 200px;
+        margin: 10px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+        position: relative;
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+        box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .card-flipper {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-style: preserve-3d;
+        transition: transform 0.5s;
+      }
+
+      .card.flipped .card-flipper {
+        transform: rotateY(180deg);
+      }
+
+      .card-front,
+      .card-back {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        backface-visibility: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .card-front {
+        background-color: #fdca40;
+        color: white;
+      }
+
+      .card-back {
+        background-color: #ff6b6b;
+        color: white;
+        transform: rotateY(180deg);
+
+        
+      }
+      input {
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        font-size: 16px;
+        margin: 5px;
+        box-shadow: 0px 0px 5px grey;
+      }
+      
+      button {
+        display: block;
+        margin-top: 10px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #4caf50;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        box-shadow: 0px 4px
+      }
+      #puntajes {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  border: 3px solid #000;
+  padding: 10px;
+  border-radius: 10px;
+}
+h1 {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+}
+
+    </style>
+  </head>
+  <body>
+    <table>
+    <td>
+      <button class="button"" onclick="iniciarJuego()">Iniciar Juego</button>
+    </td>
+   <td>
+     <button onclick="resetear()">Resetear Juego</button>
+     </td>
+  </table>
+    <input type="text" id="nombre-jugador-1" placeholder="Jugador 1" class="input">
+    <input type="text" id="nombre-jugador-2" placeholder="Jugador 2"class="input">
+    <input type="text" id="nombre-jugador-3" placeholder="Jugador 3"class="input">
+    <div id="puntajes">
+      <!-- Aquí se mostrarán los puntajes de los jugadores -->
+    </div>
+    <h1>Juego concentrese</h1>
+    <div class="card-grid">
+      <div class="card" data-verb="be" data-value="1" >
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">be</div>
+        </div>
+        
+
+      </div>
+      <div class="card" data-verb="was/were" data-value="1">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">was/were</div>d
+
+        </div>
+      </div>
+      <div class="card" data-verb="been" data-value="1">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">been</div>
+        </div>
+      </div>
+      <div class="card" data-verb="buy" data-value="2">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">buy</div>
+        </div>
+      </div>
+      <div class="card" data-verb="begin" data-value="3">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">begin</div>
+        </div>
+      </div>
+      <div class="card" data-verb="began" data-value="3">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">began</div>
+        </div>
+      </div>
+      <div class="card" data-verb="begun" data-value="3">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">begun</div>
+        </div>
+      </div>
+      
+      
+      <div class="card" data-verb="bought" data-value="2">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">bought</div>
+        </div>
+      </div>
+      
+      <div class="card" data-verb="bought" data-value="2">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">bought</div>
+        </div>
+      </div>
+      
+      <div class="card" data-verb="drive" data-value="4">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">drive</div>
+        </div>
+      </div>
+      
+      <div class="card" data-verb="drove" data-value="4">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">drove</div>
+        </div>
+      </div>
+      
+      <div class="card" data-verb="driven" data-value="4">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">driven</div>
+        </div>
+      </div>
+      <div class="card" data-verb="drink" data-value="5">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">drink</div>
+        </div>
+      </div>
+      <div class="card" data-verb="drank"data-value="5">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">drank</div>
+        </div>
+      </div>
+      <div class="card" data-verb="drunk" data-value="5">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">drunk</div>
+        </div>
+      </div>
+      
+      <div class="card" data-verb="feel" data-value="6">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">feel</div>
+        </div>
+      </div>
+      
+      <div class="card" data-verb="felt"data-value="6">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">felt</div>
+        </div>
+      </div>
+      <div class="card" data-verb="felt"data-value="6">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">felt</div>
+        </div>
+      </div>
+      
+      <div class="card" data-verb="draw" data-value="7">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">draw</div>
+        </div>
+      </div>
+      <div class="card" data-verb="drew" data-value="7">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">drew</div>
+        </div>
+      </div>
+      
+      <div class="card" data-verb="drawn"data-value="7">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">drawn</div>
+        </div>
+      </div>
+      <div class="card" data-verb="dig"data-value="8">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">dig</div>
+        </div>
+      </div>
+      <div class="card" data-verb="dug"data-value="8">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">dug</div>
+        </div>
+      </div>
+      <div class="card" data-verb="dug"data-value="8">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">dug</div>
+        </div>
+      </div>
+      
+      
+      <div class="card" data-verb="eaten"data-value="9">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">eaten</div>
+        </div>
+      </div>
+      
+      <div class="card" data-verb="choose"data-value="10">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">chosee</div>
+        </div>
+      </div>
+      <div class="card" data-verb="chosen"data-value="10">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">chosen</div>
+        </div>
+      </div>
+      <div class="card" data-verb="chose"data-value="10">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">chose</div>
+        </div>
+      </div>
+      <div class="card" data-verb="eat" data-value="9">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">eat</div>
+        </div>
+      </div>
+      <div class="card" data-verb="ate"data-value="9">
+        <div class="card-flipper">
+          <div class="card-front">?</div>
+          <div class="card-back">ate</div>
+        </div>
+        
+      
+        
+      </div>
+    </div>
+    
+    
+   
+    <script>
+
+     let jugadores = [
+      { nombre: '', puntaje: 0 },
+      { nombre: '', puntaje: 0 },
+      { nombre: '', puntaje: 0 }
+    ];
+    let currentPlayer = 0;
+    let currentPlayerIndex = 0;
+    let flippedCards = [];
+      
+
+      function shuffleCards() {
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    let randomPosition = Math.floor(Math.random() * cards.length);
+    card.style.order = randomPosition;
+  });
+}
+
+
+function iniciarJuego() {
+
+  jugadores[0].nombre = document.getElementById('nombre-jugador-1').value;
+      jugadores[1].nombre = document.getElementById('nombre-jugador-2').value;
+      jugadores[2].nombre = document.getElementById('nombre-jugador-3').value;
+      
+      // Mostrar los nombres de los jugadores en la pantalla
+      document.getElementById('puntajes').innerHTML = `
+        <p>${jugadores[0].nombre}: ${jugadores[0].puntaje}</p>
+        <p>${jugadores[1].nombre}: ${jugadores[1].puntaje}</p>
+        <p>${jugadores[2].nombre}: ${jugadores[2].puntaje}</p>
+        
+      `;
+      const cards = document.querySelectorAll('.card');
+      let flippedCards = [];
+      
+      cards.forEach(card => card.addEventListener('click', flipCard));
+     
+      function flipCard() {
+      if (flippedCards.length < 3) {
+        this.classList.add('flipped');
+        flippedCards.push(this);
+      }
+      
+      if (flippedCards.length === 3) {
+        const isSameValue = flippedCards[0].dataset.value === flippedCards[1].dataset.value && flippedCards[1].dataset.value === flippedCards[2].dataset.value;
+      
+        if (isSameValue) {
+          flippedCards.forEach(card => card.removeEventListener('click', flipCard));
+          jugadores[currentPlayer].puntaje++;
+          document.getElementById('puntajes').innerHTML = `
+            <p>${jugadores[0].nombre}: ${jugadores[0].puntaje}</p>
+            <p>${jugadores[1].nombre}: ${jugadores[1].puntaje}</p>
+            <p>${jugadores[2].nombre}: ${jugadores[2].puntaje}</p>
+          `;
+          flippedCards = [];
+        } else {
+          setTimeout(() => {
+            flippedCards.forEach(card => card.classList.remove('flipped'));
+            flippedCards = [];
+            currentPlayer = (currentPlayer + 1) % 3;
+          }, 1000);
+        }
+      }
+    
+
+        if (flippedCards.length === 3) {
+  const isSameValue = flippedCards[0].dataset.value === flippedCards[1].dataset.value && flippedCards[1].dataset.value === flippedCards[2].dataset.value;
+
+  if (isSameValue) {
+    flippedCards.forEach(card => card.removeEventListener('click', flipCard));
+    flippedCards = [];
+    jugadores.forEach(jugador => {
+      if (jugador.nombre === currentPlayer) {
+        jugador.puntaje++;
+        document.getElementById('puntajes').innerHTML = `
+          <p>${jugadores[0].nombre}: ${jugadores[0].puntaje}</p>
+          <p>${jugadores[1].nombre}: ${jugadores[1].puntaje}</p>
+          <p>${jugadores[2].nombre}: ${jugadores[2].puntaje}</p>
+        `;
+      }
+    });
+  } else {
+    setTimeout(() => {
+      flippedCards.forEach(card => card.classList.remove('flipped'));
+      flippedCards = [];
+    }, 1000);
+  }
+}
+
+      }
+      
+      function initGame() {
+        // Remover la clase "flipped" de todas las cartas
+        cards.forEach(card => card.classList.remove('flipped'));
+        
+        // Mezclar y asignar valores de las cartas
+        // ...
+      }
+      
+        
+        cardValues.forEach(value => {
+          const valueCards = document.querySelectorAll(`.card[data-value="${value}"]`);
+          if (valueCards.length === 3) {
+            valueCards.forEach(card => {
+              card.classList.add('flipped');
+              card.removeEventListener('click', flipCard);
+            });
+          }
+        });
+      
+        
+        
+      }
+      function resetear() {
+  window.location.href = "concentrese.html"; // redirige a la página principal
+}
+
+ 
+
+      
+      shuffleCards(); 
+      flipSameValueCards();
+      iniciarJuego();
+
+
+        
+      
+
+    
+            </script>
+      
+    
+  </body>
+</html>  
+
